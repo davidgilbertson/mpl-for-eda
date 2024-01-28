@@ -2,4 +2,4 @@
 .env
 .vscode/
 .idea/
-.private/
+private/
