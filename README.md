@@ -81,7 +81,7 @@ Using a `TextBox` widget to search for a point in a scatter plot
 
 ![scatter search](gallery/803_scatter_search.png)
 
-Using paginated chart to display many axes over several 'pages'. 
+Using a paginated chart to display many axes over several 'pages'. 
 
 This also lets you filter the data with a text box.
 
