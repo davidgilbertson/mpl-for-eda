@@ -4,7 +4,6 @@ from matplotlib import pyplot as plt
 from matplotlib.artist import Artist
 from matplotlib.axes import Axes
 from matplotlib.backend_bases import MouseEvent
-from matplotlib.backends.backend_agg import FigureCanvasAgg
 from matplotlib.figure import Figure
 from matplotlib.patheffects import withSimplePatchShadow
 from matplotlib.text import Text
@@ -12,7 +11,6 @@ from matplotlib.transforms import IdentityTransform
 import pandas as pd
 
 import mpl_utils
-from private.stopwatch import stopwatch
 
 
 # Added in #603

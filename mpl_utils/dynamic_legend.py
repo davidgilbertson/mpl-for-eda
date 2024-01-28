@@ -94,9 +94,4 @@ if __name__ == "__main__":
         values="Yield",
     )
     ax.plot(chart_df, label=chart_df.columns)
-    ax.scatter(
-        x=[1983, 2030],
-        y=[8, 5],
-        label="scatter points",
-    )
     self = add_dynamic_legend(loc="upper left")

@@ -1,3 +1,9 @@
+# Interactive Matplotlib for Exploratory Data Analysis
+
+🚧 This is the repository for an upcoming course, currently a work in progress.
+
+## Index
+
 The below maps the Udemy course sections and lectures to the files used in those lectures.
 
 | Section          | Lecture                                 | File                                                                                                                      |
@@ -42,3 +48,45 @@ The below maps the Udemy course sections and lectures to the files used in those
 | 9. Finale        | 902 Faster charts                       | [chart_manager.py](./mpl_utils/chart_manager.py)                                                                          |
 | 9. Finale        | 903 Scroll to zoom                      | [chart_manager.py](./mpl_utils/chart_manager.py)                                                                          |
 | 9. Finale        | 904 Axes tooltip                        | [axes_tooltip.py](./mpl_utils/charts/axes_tooltip.py)                                                                     |
+
+# Course gallery
+
+These are some of the charts that we create throughout the course.
+
+An interactive legend (click to hide/show lines)
+
+![Iterative legend](gallery/505_interactive_legend.png)
+
+A dynamic legend (show data values in legend)
+
+![Dynamic legend](gallery/508_dynamic_legend.png)
+
+A custom tooltip (show items under the cursor)
+
+![Custom tooltip](gallery/602_custom_tooltip.png)
+
+Another custom tooltip, using the legend and highlighting lines
+
+![Legend tooltip](gallery/604_legend_tooltip.png)
+
+Using `mplcursors` to create a tooltip with extended data for a single point
+
+![mplcursors tooltip](gallery/605_mplcursors_tooltip.png)
+
+Using a `Slider` widget to visualize with motion
+
+![slider widget](gallery/802_slider_widget.png)
+
+Using a `TextBox` widget to search for a point in a scatter plot
+
+![scatter search](gallery/803_scatter_search.png)
+
+Using paginated chart to display many axes over several 'pages'. 
+
+This also lets you filter the data with a text box.
+
+![paginator](gallery/804_paginator.png)
+
+Show an axes as a tooltip on another axes.
+
+![paginator](gallery/904_axes_tooltips.png)

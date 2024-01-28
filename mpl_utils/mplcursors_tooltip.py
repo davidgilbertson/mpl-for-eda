@@ -1,4 +1,3 @@
-# %%
 from collections.abc import Callable
 
 from matplotlib.collections import PathCollection
