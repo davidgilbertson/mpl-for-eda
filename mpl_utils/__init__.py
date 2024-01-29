@@ -1,6 +1,3 @@
-from collections.abc import Sequence
-from typing import Protocol, cast
-
 from matplotlib.collections import PathCollection
 import numpy as np
 from matplotlib import pyplot as plt

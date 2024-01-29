@@ -4,7 +4,6 @@ import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.backend_bases import MouseEvent
-from matplotlib.figure import Figure
 from matplotlib.transforms import Bbox
 
 import mpl_utils

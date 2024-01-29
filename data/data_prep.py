@@ -1,6 +1,6 @@
 import pandas as pd
 
-raw_df = pd.read_csv("key-crop-yields.csv")
+raw_df = pd.read_csv("originals/key-crop-yields.csv")
 df = raw_df.copy()
 df.columns = df.columns.str.extract(r"(\w*\b)", expand=False)
 df = df.rename(columns={"Entity": "Country"})
@@ -26,7 +26,7 @@ df = df.melt(
 df = df.sort_values(["Country", "Crop", "Year"])
 
 co2_df = (
-    pd.read_csv("owid-co2-data.csv")
+    pd.read_csv("originals/owid-co2-data.csv")
     .rename(
         columns={
             "iso_code": "Code",

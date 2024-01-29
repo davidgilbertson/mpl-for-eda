@@ -1,10 +1,7 @@
-from itertools import cycle
-
 from matplotlib.figure import Figure
 from matplotlib.text import Text
 import pandas as pd
 from matplotlib import pyplot as plt
-from matplotlib.axes import Axes
 from matplotlib.backend_bases import KeyEvent
 
 import mpl_utils

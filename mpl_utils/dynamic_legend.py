@@ -1,4 +1,3 @@
-from matplotlib.lines import Line2D
 import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes

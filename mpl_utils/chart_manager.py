@@ -3,7 +3,6 @@ import contextlib
 import math
 
 from matplotlib import pyplot as plt
-from matplotlib._constrained_layout import do_constrained_layout
 from matplotlib.axes import Axes
 from matplotlib.backend_bases import MouseEvent
 from matplotlib.layout_engine import ConstrainedLayoutEngine
@@ -11,8 +10,6 @@ from matplotlib.transforms import Bbox
 import pandas as pd
 
 import mpl_utils
-from private.performance import log_fig_fps
-from private.stopwatch import stopwatch
 
 
 # Added in #902
