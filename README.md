@@ -89,4 +89,4 @@ This also lets you filter the data with a text box.
 
 Show an axes as a tooltip on another axes.
 
-![paginator](gallery/904_axes_tooltips.png)
+![axes tooltip](gallery/904_axes_tooltips.png)
