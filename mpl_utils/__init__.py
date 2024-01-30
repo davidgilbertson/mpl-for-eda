@@ -1,3 +1,5 @@
+from typing import Union
+
 from matplotlib.collections import PathCollection
 import numpy as np
 from matplotlib import pyplot as plt
@@ -229,7 +231,7 @@ def get_closest(options, target):
 
 
 # Added in #508
-def get_y_at_x(artist: Line2D | PathCollection, x):
+def get_y_at_x(artist: Union[Line2D, PathCollection], x):
     """
     Extract the y-coordinate corresponding to a given x-coordinate from a matplotlib
     artist object, which can be either a Line2D or a PathCollection.

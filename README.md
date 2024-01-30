@@ -10,7 +10,7 @@ The below maps the Udemy course sections and lectures to the files used in those
 |------------------|-----------------------------------------|---------------------------------------------------------------------------------------------------------|
 | 1. Overview      | 101 Overview and housekeeping           |                                                                                                         |
 | 1. Overview      | 102 The Matplotlib docs                 |                                                                                                         |
-| 1. Overview      | 103 The course dataset                  | [crop-data.csv](./data/crop-data.csv)                                                                   |
+| 1. Overview      | 103 The course codebase                 |                                                                                                         |
 | 2. Introduction  | 201 Your first chart                    | [201_your_first_chart.py](./demos/201_your_first_chart.py)                                              |
 | 2. Introduction  | 202 More chart types                    | [202_more_chart_types.py](./demos/202_more_chart_types.py)                                              |
 | 2. Introduction  | 203 Multiple charts                     | [203a_multi_series.py](./demos/203a_multi_series.py) & [203b_multi_axes.py](./demos/203b_multi_axes.py) |

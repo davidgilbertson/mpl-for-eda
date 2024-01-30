@@ -1,3 +1,5 @@
+from typing import Union
+
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.backend_bases import MouseEvent
@@ -16,7 +18,7 @@ class add_legend_tooltip(mpl_utils.AxesEventHandlers):
         super().__init__(ax)
         self.ax = ax
         self.fig = ax.figure
-        self.artists: list[Line2D | PathCollection] = ax.lines + ax.collections
+        self.artists: list[Union[Line2D, PathCollection]] = ax.lines + ax.collections
         self.fig.canvas.mpl_connect("motion_notify_event", self.on_mouse_move)
         ax._legend_tooltip_ref = self
 

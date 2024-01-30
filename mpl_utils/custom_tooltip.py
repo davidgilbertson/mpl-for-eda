@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from typing import Optional
 
 from matplotlib import pyplot as plt
 from matplotlib.artist import Artist
@@ -45,7 +46,7 @@ class add_custom_tooltip(mpl_utils.AxesEventHandlers):
     def __init__(
         self,
         ax: Axes = None,
-        get_text: Callable[[MouseEvent], str | None] = _default_get_text,
+        get_text: Callable[[MouseEvent], Optional[str]] = _default_get_text,
         use_blit=True,
     ):
         ax = ax or plt.gca()

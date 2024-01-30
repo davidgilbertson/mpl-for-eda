@@ -1,5 +1,5 @@
 from collections.abc import Sequence
-from typing import Literal
+from typing import Literal, Union
 
 from matplotlib import pyplot as plt
 from matplotlib.transforms import Bbox
@@ -36,8 +36,8 @@ def flex_subplots(
     num="Chart",
     nrows: int = None,
     ncols: int = None,
-    row_heights: Sequence[float | str] = None,
-    col_widths: Sequence[float | str] = None,
+    row_heights: Sequence[Union[float, str]] = None,
+    col_widths: Sequence[Union[float, str]] = None,
     **kwargs,
 ):
     if num and "clear" not in kwargs:

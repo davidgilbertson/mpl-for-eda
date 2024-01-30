@@ -1,5 +1,4 @@
 from matplotlib import pyplot as plt
-from matplotlib.figure import Figure
 
 
 # This is called as a hook when a figure is created

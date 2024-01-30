@@ -1,4 +1,5 @@
 from collections.abc import Callable
+from typing import Optional
 
 from matplotlib.collections import PathCollection
 from matplotlib.lines import Line2D
@@ -10,7 +11,7 @@ import pandas as pd
 
 # Added in #605
 def add_mplcursors_tooltip(
-    get_text: Callable[[mplcursors.Selection], str | None] = None,
+    get_text: Callable[[mplcursors.Selection], Optional[str]] = None,
     pickables=None,  # Added in #802
 ):
     tooltip_cursor = mplcursors.cursor(
