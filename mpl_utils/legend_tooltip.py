@@ -79,7 +79,6 @@ if __name__ == "__main__":
     chart_df = df.pivot_table(
         index="Year",
         columns="Country",
-        # columns=["Country", "Crop"],
         values="Yield",
     )
     # Mock missing data

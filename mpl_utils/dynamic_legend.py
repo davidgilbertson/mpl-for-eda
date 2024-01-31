@@ -60,9 +60,9 @@ class add_dynamic_legend(mpl_utils.AxesEventHandlers):
         self.legend.set_title(f"Legend (values for {x_value:g})")
 
         legend_texts = self.legend.texts
-        artists, labels = self.ax.get_legend_handles_labels()
-        for text, artist, label in zip(legend_texts, artists, labels):
-            value = mpl_utils.get_y_at_x(artist, x_value)
+        ax_artists, labels = self.ax.get_legend_handles_labels()
+        for text, ax_artist, label in zip(legend_texts, ax_artists, labels):
+            value = mpl_utils.get_y_at_x(ax_artist, x_value)
             text.set_text(f"{label} ({value:g})")
 
         self.vline.set_xdata([x_value])

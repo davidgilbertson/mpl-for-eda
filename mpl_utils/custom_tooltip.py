@@ -29,11 +29,8 @@ class Blitter:
         self.background = self.canvas.copy_from_bbox(self.fig.bbox)
 
     def blit(self, artist: Artist):
-        if not isinstance(artist, list):
-            artist = [artist]
         self.canvas.restore_region(self.background)
-        for x in artist:
-            self.fig.draw_artist(x)
+        self.fig.draw_artist(artist)
         self.canvas.blit()
 
 
@@ -145,6 +142,7 @@ if __name__ == "__main__":
     chart_df = df.pivot_table(
         index="Year",
         columns="Country",
+        # columns=["Country", "Crop"],
         values="Yield",
     )
     # Mock missing data

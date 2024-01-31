@@ -8,34 +8,32 @@ from matplotlib.patheffects import withSimplePatchShadow
 from matplotlib.text import Annotation, Text
 
 import mpl_utils
-from private.performance import log_calls_per_second
 
 
 class Blitter:
     def __init__(self, fig: Figure):
         self.fig = fig
         self.canvas = fig.canvas
-        self._bg = self.canvas.copy_from_bbox(self.fig.bbox)
+        self.background = None
+        self.capture_background()
 
-        fig.canvas.mpl_connect("draw_event", self.capture_background)
         fig.canvas.mpl_connect("figure_leave_event", self.restore_background)
-        # Restoring in axes_leave_event causes motion_notify_events to fire out of order
+        fig.canvas.mpl_connect("draw_event", self.capture_background)
 
-    def update_artist(self, artist: Artist):
-        self.canvas.restore_region(self._bg)
+    def capture_background(self, _=None):
+        self.background = self.canvas.copy_from_bbox(self.fig.bbox)
+
+    def blit(self, artist: Artist):
+        self.canvas.restore_region(self.background)
         self.fig.draw_artist(artist)
         self.canvas.blit()
 
-    def capture_background(self, _=None):
-        self._bg = self.canvas.copy_from_bbox(self.fig.bbox)
-
     def restore_background(self, _=None):
-        self.canvas.restore_region(self._bg)
+        self.canvas.restore_region(self.background)
         self.canvas.blit()
         self.canvas.flush_events()
 
 
-# TODO (@davidgilbertson): maybe leave this in the repo but don't demo the full thing
 class TextOptionsDemo:
     fig: Figure
     tl_ax: Axes
@@ -48,15 +46,12 @@ class TextOptionsDemo:
     offset_box: AnchoredOffsetbox
 
     def __init__(self):
-        self.use_blitting = True
-
         mpl_utils.setup()
         self.fig, ((self.tl_ax, self.tr_ax), (self.bl_ax, self.br_ax)) = plt.subplots(
             num="Text options - moving",
             clear=True,
             nrows=2,
             ncols=2,
-            # layout="none",
         )
         mpl_utils.clear_events()
 
@@ -70,12 +65,11 @@ class TextOptionsDemo:
         self.add_text()
         self.add_annotation()
         self.add_anchored_text()
-        # self.anchored_text = None
         self.offset_box = None
 
         self.fig.canvas.mpl_connect("motion_notify_event", self.on_mouse_move)
         self.blitter = Blitter(self.fig)
-        self.fig._demo_ref = self
+        self.fig._TextOptionsDemo_ref = self
 
     def add_text(self):
         self.text = self.tl_ax.text(
@@ -89,7 +83,7 @@ class TextOptionsDemo:
                 path_effects=[withSimplePatchShadow(offset=(2, -2))],
             ),
             linespacing=1.5,
-            animated=self.use_blitting,
+            animated=True,
         )
 
     def offsets_from_event(self, event):
@@ -125,7 +119,7 @@ class TextOptionsDemo:
                 path_effects=[withSimplePatchShadow(offset=(2, -2))],
             ),
             linespacing=1.5,
-            animated=self.use_blitting,
+            animated=True,
         )
 
     def set_annotation_position(self, event):
@@ -155,7 +149,7 @@ class TextOptionsDemo:
                 ),
                 linespacing=1.5,
             ),
-            animated=self.use_blitting,
+            animated=True,
         )
         self.fig.add_artist(self.anchored_text)
 
@@ -168,6 +162,7 @@ class TextOptionsDemo:
         return self.anchored_text
 
     def set_offset_box_position(self, event):
+        # We don't 'move' an offset box, we delete it and create a new one
         if self.offset_box:
             self.offset_box.remove()
 
@@ -184,7 +179,7 @@ class TextOptionsDemo:
                 ],
                 sep=3,
             ),
-            animated=self.use_blitting,
+            animated=True,
         )
         self.offset_box.patch.set(
             facecolor=plt.rcParams["patch.facecolor"],
@@ -207,8 +202,6 @@ class TextOptionsDemo:
         return anchor_corner
 
     def on_mouse_move(self, event: MouseEvent):
-        log_calls_per_second()
-
         method = None
         if event.inaxes == self.tl_ax:
             method = self.set_text_position
@@ -220,17 +213,11 @@ class TextOptionsDemo:
             method = self.set_offset_box_position
 
         if method:
-            updated_item = method(event)
+            updated_artist = method(event)
 
-            if self.use_blitting:
-                self.blitter.update_artist(updated_item)
-            else:
-                self.fig.canvas.draw_idle()
+            self.blitter.blit(updated_artist)
         else:
-            if self.use_blitting:
-                self.blitter.restore_background()
-            else:
-                self.fig.canvas.draw_idle()
+            self.blitter.restore_background()
 
 
-self = TextOptionsDemo()
+TextOptionsDemo()
