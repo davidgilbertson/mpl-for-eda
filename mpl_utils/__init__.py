@@ -28,25 +28,29 @@ from .chart_manager import chart  # Added in #901
 # Added in #403
 # This is called as a hook when a figure is created
 def configure_figure(fig):
-    # fig.canvas.manager.window.geometry("640x522+2976+402")  # Baby sized
-    # fig.canvas.manager.window.geometry("1924x1054+1790+297")  # Full width for course
-    # fig.canvas.manager.window.geometry("840x1054+2874+297")  # Standard for course
-    fig.canvas.manager.window.geometry("840x1054+4161+66")  # Second monitor
-    # fig.canvas.manager.window.geometry("1000x1000+4161+66")  # Square
+    try:
+        # fig.canvas.manager.window.geometry("1924x1054+1790+297")  # Full width for course
+        # fig.canvas.manager.window.geometry("840x1054+2874+297")  # Standard for course
+        fig.canvas.manager.window.geometry("840x1054+4161+66")  # Second monitor
+        # fig.canvas.manager.window.geometry("1000x1000+4161+66")  # Square
+    except AttributeError:
+        pass
 
 
 # Added in #401
 def setup(font_bump=1):
+    plt.rcdefaults()  # Added in #404
+
+    prop_cycle = (
+        plt.cycler("linestyle", ["-", "--", ":", "-."])
+        * plt.rcParamsOrig["axes.prop_cycle"]
+    )
+
     blue_grey_100 = "#cfd8dc"
     blue_grey_300 = "#90a4ae"
     blue_grey_700 = "#455a64"
     blue_grey_900 = "#263238"
     blue_grey_950 = "#1d272b"
-
-    prop_cycle = (
-        plt.cycler("linestyle", ["-", "--", ":", "-."])
-        * plt.rcParamsDefault["axes.prop_cycle"]
-    )
 
     plt.rcParams.update(
         {
@@ -113,9 +117,9 @@ _initial_cids = {}
 # Added in #502
 def clear_events(fig=None):
     """
-    Clears user-added event handlers so that code can be re-run without
+    Clears user-added event handlers so that code can be rerun without
     a build up of events.
-    Should be called after figure creation, before adding events
+    Should be called after figure creation, before connecting event handlers
     """
     fig = fig or plt.gcf()
 
@@ -128,7 +132,7 @@ def clear_events(fig=None):
         # These are the event CIDs for a new figure
         _initial_cids[fig.number] = cids
     else:
-        # We must be re-running code for an existing figure
+        # We must be rerunning code for an existing figure
         # What CIDs have been added since the first time this was called?
         added_cids = set(cids).difference(_initial_cids[fig.number])
 
@@ -268,39 +272,6 @@ def get_y_at_x(artist: Union[Line2D, PathCollection], x):
         return y_data[index]
     except ValueError:
         return float("nan")
-
-
-# # Added in #509
-# # TODO (@davidgilbertson): delete me
-# def get_line_y_at_x(line: Line2D, x):
-#     """
-#     Get the y-coordinate of a point on a 2D line at a specified x-coordinate.
-#
-#     Parameters
-#     ----------
-#     line : Line2D
-#         The 2D line represented as a Line2D object, which contains x and y data.
-#     x : float
-#         The x-coordinate at which the y-coordinate is to be found.
-#
-#     Returns
-#     -------
-#     float
-#         The y-coordinate corresponding to the given x-coordinate on the line.
-#         Returns NaN if the x-coordinate is not found in the line's data.
-#
-#     Notes
-#     -----
-#     This function searches for the specified x-coordinate in the line's data.
-#     If the x-coordinate is not found, it returns NaN. This might occur if the
-#     x-coordinate is outside the range of the line's data or if it's not exactly
-#     matching any of the existing x-coordinates due to floating-point precision issues.
-#     """
-#     try:
-#         index = list(line.get_xdata()).index(x)
-#         return line.get_ydata()[index]
-#     except ValueError:
-#         return float("nan")
 
 
 # Added in #602

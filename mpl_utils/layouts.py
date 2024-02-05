@@ -150,10 +150,6 @@ def add_axes_px(
 if __name__ == "__main__":
     fig, axs = flex_subplots(row_heights=["100px", 1, 1])
     axs[0].set_axis_off()
-    # fixed_ax = fig.add_axes(
-    #     rect=(0.1, 0.2, 0.3, 0.4),
-    #     facecolor="teal",
-    # )
     ax = add_axes_px(
         bounds=(10, 20, 300, 400),
         origin="top right",

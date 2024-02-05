@@ -12,19 +12,19 @@ The below maps the Udemy course sections and lectures to the files used in those
 | 1. Overview      | 102 The course codebase                 |                                                                                                       |
 | 1. Overview      | 103 The Matplotlib docs                 |                                                                                                       |
 | 2. Introduction  | 201 Your first chart                    | [201_your_first_chart.py](theory/201_your_first_chart.py)                                             |
-| 2. Introduction  | 202 More chart types                    | [202_more_chart_types.py](theory/202_more_chart_types.py)                                             |
+| 2. Introduction  | 202 Chart types                         | [202_chart_types.py](theory/202_chart_types.py)                                                       |
 | 2. Introduction  | 203 Multiple charts                     | [203a_multi_series.py](theory/203a_multi_series.py) & [203b_multi_axes.py](theory/203b_multi_axes.py) |
-| 3. Interactivity | 301 Backends                            | [301_interactive_mode.py](theory/301_interactive_mode.py)                                             |
-| 3. Interactivity | 302 Interactive figure                  | [302_reusing_the_window.py](theory/302_reusing_the_window.py)                                         |
+| 3. Interactivity | 301 Backends and interactive mode       | [301_interactive_mode.py](theory/301_interactive_mode.py)                                             |
+| 3. Interactivity | 302 The interactive figure window       | [302_reusing_the_window.py](theory/302_reusing_the_window.py)                                         |
 | 4. Config        | 401 Sharing config                      | [401_config_setup.py](theory/401_config_setup.py)                                                     |
 | 4. Config        | 402 Configuring styles                  | [402_styles.py](theory/402_styles.py)                                                                 |
 | 4. Config        | 403 Hooks                               | [403_hooks.py](theory/403_hooks.py)                                                                   |
-| 4. Config        | 404 Tick label location                 | [404_tick_label_locating.py](theory/404_tick_label_locating.py)                                       |
-| 4. Config        | 405 Tick label formatting               | [405_tick_label_formatting.py](theory/405_tick_label_formatting.py)                                   |
+| 4. Config        | 404 Tick location                       | [404_tick_locating.py](theory/404_tick_locating.py)                                                   |
+| 4. Config        | 405 Tick formatting                     | [405_tick_formatting.py](theory/405_tick_formatting.py)                                               |
 | 5. Events        | 501 Mouse events                        | [501_mouse_events.py](theory/501_mouse_events.py)                                                     |
-| 5. Events        | 502 Clearing events                     | [mpl_utils/__init__.py](./mpl_utils/__init__.py)                                                      |
+| 5. Events        | 502 Clearing events                     | [mpl_utils/\__init\__.py](./mpl_utils/__init__.py)                                                    |
 | 5. Events        | 503 Keyboard events                     | [text_zoom.py](./mpl_utils/text_zoom.py)                                                              |
-| 5. Events        | 504 Figure events                       | [mpl_utils/__init__.py](./mpl_utils/__init__.py)                                                      |
+| 5. Events        | 504 Figure events                       | [mpl_utils/\__init\__.py](./mpl_utils/__init__.py)                                                    |
 | 5. Events        | 505 Picking                             | [interactive_legend.py](./mpl_utils/interactive_legend.py)                                            |
 | 5. Events        | 506 Interactive legend: visual feedback | [interactive_legend.py](./mpl_utils/interactive_legend.py)                                            |
 | 5. Events        | 507 Interactive legend: focus on hover  | [interactive_legend.py](./mpl_utils/interactive_legend.py)                                            |

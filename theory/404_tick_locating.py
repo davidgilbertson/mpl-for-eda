@@ -9,7 +9,7 @@ chart_df = df[df.Country.eq("Niue") & df.Crop.eq("Cassava")]
 
 mpl_utils.setup()
 # plt.rcParams["axes.autolimit_mode"] = "round_numbers"
-fig, ax = plt.subplots(num="Tick label locating", clear=True)
+fig, ax = plt.subplots(num="Tick locators", clear=True)
 
 ax.plot(chart_df.Year, chart_df.Yield)
 ax.set_ylim(0)

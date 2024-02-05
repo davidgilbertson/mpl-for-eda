@@ -3,9 +3,10 @@ from matplotlib import pyplot as plt
 
 # This is called as a hook when a figure is created
 def configure_figure(fig):
-    # fig.canvas.manager.window.geometry("840x1054+2874+297")
-    # fig.canvas.manager.window.geometry("840x1054+2874+297")
-    fig.canvas.manager.window.geometry("640x522+2976+402")
+    try:
+        fig.canvas.manager.window.geometry("840x1054+2874+297")
+    except AttributeError:
+        pass
 
 
 def setup(font_bump=1):
@@ -18,8 +19,7 @@ def setup(font_bump=1):
     # This cycler will cycle through the default colors with a plain line,
     # then again for a dashed line, and again for a dotted line
     prop_cycle = (
-        plt.cycler("linestyle", ["-", "--", ":"])
-        * plt.rcParamsDefault["axes.prop_cycle"]
+        plt.cycler("linestyle", ["-", "--", ":"]) * plt.rcParamsOrig["axes.prop_cycle"]
     )
 
     plt.rcParams.update(
@@ -74,7 +74,7 @@ def setup(font_bump=1):
             "patch.facecolor": blue_grey_900,  # used by tooltip
             "patch.edgecolor": blue_grey_700,
             "patch.linewidth": 0.5,
-            "figure.hooks": "mpl_utils:configure_figure",
+            "figure.hooks": "403_hooks:configure_figure",
         }
     )
 
@@ -82,7 +82,7 @@ def setup(font_bump=1):
 if __name__ == "__main__":
     setup()
 
-    fig, ax = plt.subplots(num="My chart window", clear=True)
+    fig, ax = plt.subplots(num="My chart", clear=True)
 
     for i in range(15):
         ax.plot([0, i], label=f"Line {i}")

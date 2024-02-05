@@ -126,7 +126,6 @@ class chart:
         mpl_utils.setup()
         self.fig, self.ax = plt.subplots(num=name, clear=True, **kwargs)
         mpl_utils.clear_events()
-        mpl_utils.add_text_zoom()  # TODO (@davidgilbertson): add this?
 
         if pan and not self.existing_figure:
             self.fig.canvas.toolbar.pan()
@@ -177,29 +176,7 @@ class chart:
 if __name__ == "__main__":
     df = pd.read_csv("../data/crop-data.csv")
 
-    # plt.rcParams["axes.autolimit_mode"] = "round_numbers"
-    # plt.rcParams["axes.autolimit_mode"] = "data"
-    # mpl_utils.setup()
-    # fig, ax = plt.subplots(
-    #     1,
-    #     1,
-    #     num="testing",
-    #     clear=True,
-    #     sharex=True,
-    #     sharey=True,
-    # )
-    # mpl_utils.clear_events()
-    # ax.plot(range(81))
-    # # axs[1].plot([0, 1, 2, 3, 4.1], [1, 2, 3, 2, 3])
-    # add_zoom_on_scroll(fig)
-
     with chart() as ax:
-        # chart_df = df.pivot_table(
-        #     index="SubRegion",
-        #     columns="Crop",
-        #     values="Yield",
-        # )
-        # mpl_utils.plot_heatmap(chart_df, ax=ax)
         for group_name, group_df in df.groupby("Region"):
             chart_df = group_df.pivot_table(
                 index="Year",

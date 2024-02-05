@@ -25,7 +25,6 @@ class add_interactive_legend:
 
         ax = ax or plt.gca()
         self.fig = ax.figure
-        # TODO (@davidgilbertson): undo draggable
         self.legend = ax.legend(**kwargs)
         self.series_items = {}
         self.focused_item = None

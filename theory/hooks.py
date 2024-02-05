@@ -1,2 +1,5 @@
 def configure_figure(fig):
-    fig.canvas.manager.window.geometry("640x522+2976+402")
+    try:
+        fig.canvas.manager.window.geometry("640x522+2976+402")
+    except AttributeError:
+        pass

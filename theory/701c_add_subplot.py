@@ -31,4 +31,4 @@ for i in range(25):
 for ax in fig.axes:
     ax.set_facecolor("tab:blue")
 
-print(ax2.get_subplotspec())
+subplot_spec = ax2.get_subplotspec()

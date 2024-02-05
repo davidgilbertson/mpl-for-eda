@@ -18,7 +18,11 @@ class add_legend_tooltip(mpl_utils.AxesEventHandlers):
         super().__init__(ax)
         self.ax = ax
         self.fig = ax.figure
-        self.artists: list[Union[Line2D, PathCollection]] = ax.lines + ax.collections
+        self.artists = [
+            artist
+            for artist in ax.get_children()
+            if isinstance(artist, (Line2D, PathCollection))
+        ]
         self.fig.canvas.mpl_connect("motion_notify_event", self.on_mouse_move)
         ax._legend_tooltip_ref = self
 

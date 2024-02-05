@@ -18,4 +18,4 @@ for pos, ax in np.ndenumerate(axs):
     ax.set_facecolor("tab:blue")
 
 # The GridSpec behind the scenes
-print(axs[0, 0].get_gridspec())
+grid_spec = axs[0, 0].get_gridspec()
