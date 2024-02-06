@@ -70,10 +70,10 @@ if __name__ == "__main__":
         [2015, "Locust plague"],
         [2018, "Drought"],
     ]
-    for year, event_name in mock_events:
+    for year, label in mock_events:
         ax.axvline(
             x=year,
-            label=f"_{event_name}",
+            label=f"_{label}",
             color="#444",
             linestyle=":",
             linewidth=3,
