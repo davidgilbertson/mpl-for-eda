@@ -1,5 +1,3 @@
-from typing import Union
-
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.backend_bases import MouseEvent
@@ -38,9 +36,9 @@ class add_legend_tooltip(mpl_utils.EventsMixin):
 
         for artist in self.artists:
             if artist.contains(event)[0]:
+                handles.append(artist)
                 value = mpl_utils.get_y_at_x(artist, x_value)
                 labels.append(f"{artist.get_label()}: {value:g}")
-                handles.append(artist)
                 artist.set_alpha(1)
             else:
                 artist.set_alpha(0.07)
@@ -56,8 +54,8 @@ class add_legend_tooltip(mpl_utils.EventsMixin):
                 labels=labels,
                 title=mpl_utils.bold(x_value),
                 bbox_to_anchor=(event.x, event.y),
-                loc=f"{va} {ha}",
                 bbox_transform=IdentityTransform(),
+                loc=f"{va} {ha}",
             ).set(in_layout=False)
         else:
             if legend := self.ax.get_legend():
