@@ -5,7 +5,7 @@ from matplotlib.backend_bases import MouseButton, MouseEvent
 
 
 # Added in #509
-class AxesEventHandlers:
+class EventsMixin:
     def __init__(self, ax: Axes):
         self.ax = ax
         ax.figure.canvas.mpl_connect("button_press_event", self._on_button_press)

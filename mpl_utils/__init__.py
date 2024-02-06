@@ -10,7 +10,7 @@ import pandas as pd
 
 
 # AxesEventHandlers must come before modules that use it.
-from .event_helpers import AxesEventHandlers  # Added in #509
+from .event_helpers import EventsMixin  # Added in #509
 from .text_zoom import add_text_zoom  # Added in #503
 from .interactive_legend import add_interactive_legend  # Added in #506
 from .dynamic_legend import add_dynamic_legend  # Added in #508
@@ -261,7 +261,7 @@ def get_y_at_x(artist: Union[Line2D, PathCollection], x):
     """
 
     if isinstance(artist, Line2D):
-        x_data, y_data = artist.get_xydata().T
+        x_data, y_data = artist.get_data()
     elif isinstance(artist, PathCollection):
         x_data, y_data = artist.get_offsets().T
     else:

@@ -1,8 +1,8 @@
+from matplotlib import pyplot as plt
+from matplotlib.backend_bases import KeyEvent
 from matplotlib.figure import Figure
 from matplotlib.text import Text
 import pandas as pd
-from matplotlib import pyplot as plt
-from matplotlib.backend_bases import KeyEvent
 
 import mpl_utils
 
@@ -17,6 +17,7 @@ class add_text_zoom:
     def on_key_press(self, event: KeyEvent):
         if event.key == "ctrl+equal":
             for text in self.fig.findobj(Text):
+                text: Text
                 text.set_fontsize(text.get_fontsize() + 1)
             self.delta += 1
         elif event.key == "ctrl+minus":
@@ -53,4 +54,4 @@ if __name__ == "__main__":
         ylabel="Yield",
     )
 
-    self = add_text_zoom()
+    add_text_zoom()

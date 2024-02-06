@@ -12,7 +12,7 @@ import mpl_utils
 
 
 # Added in #604
-class add_legend_tooltip(mpl_utils.AxesEventHandlers):
+class add_legend_tooltip(mpl_utils.EventsMixin):
     def __init__(self, ax: Axes = None):
         ax = ax or plt.gca()
         super().__init__(ax)

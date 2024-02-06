@@ -5,7 +5,7 @@ from matplotlib.axes import Axes
 import mpl_utils
 
 
-class add_dynamic_legend(mpl_utils.AxesEventHandlers):
+class add_dynamic_legend(mpl_utils.EventsMixin):
     def __init__(self, ax: Axes = None, **kwargs):
         if kwargs.get("reverse"):
             raise ValueError("Reversed legend is not supported")

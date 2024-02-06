@@ -9,6 +9,7 @@ mpl_utils.setup()
 fig, ax = plt.subplots(num="Text options", clear=True)
 mpl_utils.add_text_zoom()
 ax: Axes
+
 ax.scatter(
     [400, 400, 400, 400],
     [200, 400, 600, 800],

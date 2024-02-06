@@ -39,7 +39,7 @@ def _default_get_text(event: MouseEvent):
 
 
 # Added in #602
-class add_custom_tooltip(mpl_utils.AxesEventHandlers):
+class add_custom_tooltip(mpl_utils.EventsMixin):
     def __init__(
         self,
         ax: Axes = None,
@@ -159,40 +159,4 @@ if __name__ == "__main__":
     self = add_custom_tooltip(
         ax=ax,
         get_text=get_text,
-        # use_blit=False,
     )
-
-    # Multi-axes demo of blitting vs none
-    # mpl_utils.setup()
-    # fig, axs = plt.subplots(
-    #     num="Custom tooltip",
-    #     clear=True,
-    #     nrows=2,
-    #     ncols=2,
-    #     squeeze=False,
-    # )
-    # mpl_utils.clear_events()
-    #
-    # df = pd.read_csv("../data/crop-data.csv")
-    #
-    # for ax, (crop_name, crop_df) in zip(axs.flat, df.groupby("Crop")):
-    #     chart_df = crop_df.pivot_table(
-    #         index="Year",
-    #         columns="Country",
-    #         values="Yield",
-    #     )
-    #     chart_df.loc[1980:1983, "F":"G"] = 0
-    #     ax.plot(
-    #         chart_df,
-    #         label=chart_df.columns,
-    #         color="C0",
-    #         linestyle="-",
-    #         linewidth=0.5,
-    #     )
-    #     ax.set_title(crop_name)
-    #
-    #     self = add_custom_tooltip(
-    #         ax=ax,
-    #         get_text=get_text,
-    #         use_blit=crop_name >= "Beans",
-    #     )

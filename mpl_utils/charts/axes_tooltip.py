@@ -9,7 +9,7 @@ from matplotlib.transforms import Bbox
 import mpl_utils
 
 
-class add_axes_tooltip(mpl_utils.AxesEventHandlers):
+class add_axes_tooltip(mpl_utils.EventsMixin):
     def __init__(
         self,
         ax: Axes,

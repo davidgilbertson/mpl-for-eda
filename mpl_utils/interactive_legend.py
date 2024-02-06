@@ -73,10 +73,7 @@ class add_interactive_legend:
 
         if matching_item:
             for item in self.series_items.values():
-                if item is matching_item:
-                    item.ax_artist.set_alpha(1)
-                else:
-                    item.ax_artist.set_alpha(0.2)
+                item.ax_artist.set_alpha(1 if item is matching_item else 0.2)
         elif self.focused_item:
             for item in self.series_items.values():
                 item.ax_artist.set_alpha(item.original_alpha)
@@ -102,14 +99,9 @@ if __name__ == "__main__":
 
     df = pd.read_csv("../data/crop-data.csv")
     # df = df[df.Region.eq("Europe")]
-    # df = df[df.SubRegion.eq("Northern Europe")]
-    # df = df[df.SubRegion.eq("Southern Europe")]
-    # df = df[df.Crop.eq("Maize")]
     chart_df = df.pivot_table(
         index="Year",
-        # columns="Region",
         columns="Region",
-        # columns="Country",
         values="Yield",
     )
     ax.plot(chart_df, label=chart_df.columns, alpha=1)
