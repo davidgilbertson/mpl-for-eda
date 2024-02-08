@@ -1,6 +1,6 @@
-from collections.abc import Sequence, Iterable
+from collections.abc import Sequence, Iterable, Callable
 from itertools import zip_longest
-from typing import Callable, Any
+from typing import Any
 
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes

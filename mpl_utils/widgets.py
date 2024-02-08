@@ -1,4 +1,5 @@
-from typing import Callable, Literal
+from collections.abc import Callable
+from typing import Literal
 
 from matplotlib import pyplot as plt
 from matplotlib.backend_bases import KeyEvent

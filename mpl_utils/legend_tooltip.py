@@ -11,10 +11,15 @@ import mpl_utils
 
 # Added in #604
 class add_legend_tooltip(mpl_utils.EventsMixin):
-    def __init__(self, ax: Axes = None):
+    def __init__(
+        self,
+        ax: Axes = None,
+        title_format="{:g}",
+    ):
         ax = ax or plt.gca()
         super().__init__(ax)
         self.ax = ax
+        self.title_format = title_format
         self.fig = ax.figure
         self.artists = [
             artist
@@ -31,8 +36,7 @@ class add_legend_tooltip(mpl_utils.EventsMixin):
         handles = []
         labels = []
 
-        x_values = mpl_utils.get_x_values_from_ax(self.ax)
-        x_value = mpl_utils.get_closest(x_values, event.xdata)
+        x_value = mpl_utils.get_closest_x(event)
 
         for artist in self.artists:
             if artist.contains(event)[0]:
@@ -52,10 +56,11 @@ class add_legend_tooltip(mpl_utils.EventsMixin):
             self.ax.legend(
                 handles=handles,
                 labels=labels,
-                title=mpl_utils.bold(x_value),
+                title=mpl_utils.bold(self.title_format.format(x_value)),
                 bbox_to_anchor=(event.x, event.y),
                 bbox_transform=IdentityTransform(),
                 loc=f"{va} {ha}",
+                shadow=True,
             ).set(in_layout=False)
         else:
             if legend := self.ax.get_legend():
@@ -84,7 +89,7 @@ if __name__ == "__main__":
         values="Yield",
     )
     # Mock missing data
-    chart_df.loc[1980:1983, "F":"G"] = 0
+    chart_df.iloc[20:25, 60:65] = 0
 
     ax.plot(chart_df, label=chart_df.columns)
-    self = add_legend_tooltip()
+    add_legend_tooltip()

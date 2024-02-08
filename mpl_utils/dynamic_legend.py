@@ -1,12 +1,17 @@
-import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
+import pandas as pd
 
 import mpl_utils
 
 
 class add_dynamic_legend(mpl_utils.EventsMixin):
-    def __init__(self, ax: Axes = None, **kwargs):
+    def __init__(
+        self,
+        ax: Axes = None,
+        title_format="{:g}",
+        **kwargs,
+    ):
         if kwargs.get("reverse"):
             raise ValueError("Reversed legend is not supported")
 
@@ -14,6 +19,7 @@ class add_dynamic_legend(mpl_utils.EventsMixin):
         super().__init__(ax)
 
         self.ax = ax
+        self.title_format = title_format
         self.fig = ax.figure
         self.legend = ax.legend(title="Legend", alignment="left", **kwargs)
 
@@ -55,9 +61,9 @@ class add_dynamic_legend(mpl_utils.EventsMixin):
             self.reset()
 
     def update(self, event):
-        x_values = mpl_utils.get_x_values_from_ax(self.ax)
-        x_value = mpl_utils.get_closest(x_values, event.xdata)
-        self.legend.set_title(f"Legend (values for {x_value:g})")
+        x_value = mpl_utils.get_closest_x(event)
+        x_value_string = self.title_format.format(x_value)
+        self.legend.set_title(f"Legend (values for {x_value_string})")
 
         legend_texts = self.legend.texts
         ax_artists, labels = self.ax.get_legend_handles_labels()
@@ -93,4 +99,4 @@ if __name__ == "__main__":
         values="Yield",
     )
     ax.plot(chart_df, label=chart_df.columns)
-    self = add_dynamic_legend(loc="upper left")
+    add_dynamic_legend(loc="upper left")

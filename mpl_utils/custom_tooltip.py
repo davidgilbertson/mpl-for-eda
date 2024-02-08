@@ -118,11 +118,10 @@ class add_custom_tooltip(mpl_utils.EventsMixin):
 if __name__ == "__main__":
 
     def get_text(event: MouseEvent):
-        years = mpl_utils.get_x_values_from_ax(event.inaxes)
-        year = mpl_utils.get_closest(years, event.xdata)
+        year = mpl_utils.get_closest_x(event)
 
         has_match = False
-        text = mpl_utils.bold(year)
+        text = mpl_utils.bold(f"{year:g}")
 
         for line in event.inaxes.lines:
             if line.contains(event)[0]:
@@ -146,7 +145,7 @@ if __name__ == "__main__":
         values="Yield",
     )
     # Mock missing data
-    chart_df.loc[1980:1983, "F":"G"] = 0
+    chart_df.iloc[20:25, 60:65] = 0
 
     ax.plot(
         chart_df,

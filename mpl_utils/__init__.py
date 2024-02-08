@@ -1,15 +1,17 @@
 from typing import Union
 
-from matplotlib.collections import PathCollection
-import numpy as np
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
+from matplotlib.backend_bases import MouseEvent
+from matplotlib.collections import PathCollection
+from matplotlib.dates import DateLocator, num2date
 from matplotlib.lines import Line2D
 from matplotlib.ticker import MaxNLocator
+import numpy as np
 import pandas as pd
+from pandas.plotting._matplotlib.converter import TimeSeries_DateLocator
 
-
-# AxesEventHandlers must come before modules that use it.
+# EventsMixin must come before modules that use it.
 from .event_helpers import EventsMixin  # Added in #509
 from .text_zoom import add_text_zoom  # Added in #503
 from .interactive_legend import add_interactive_legend  # Added in #506
@@ -20,7 +22,7 @@ from .mplcursors_tooltip import add_mplcursors_tooltip  # Added in #605
 from .layouts import flex_subplots, add_axes_px  # Added in #702 and #703
 from .widgets import add_text_box  # Added in #803
 from .charts.searchable_scatter import plot_searchable_scatter  # Added in #803
-from .charts.heatmap import plot_heatmap  # Added in #607
+from .charts.heatmap import plot_heatmap  # Added in #606
 from .charts.paginator import plot_paginated  # Added in #804
 from .chart_manager import chart  # Added in #901
 
@@ -193,7 +195,7 @@ def get_x_values_from_ax(ax: Axes):
 
     for artist in ax.get_children():
         if isinstance(artist, Line2D):
-            unique_x_values.update(artist.get_xdata())
+            unique_x_values.update(artist.get_xdata(orig=False))
         elif isinstance(artist, PathCollection):
             x_data = artist.get_offsets()[:, 0]
             unique_x_values.update(x_data)
@@ -234,6 +236,29 @@ def get_closest(options, target):
 
 
 # Added in #508
+def get_closest_x(event: MouseEvent):
+    ax = event.inaxes
+
+    if not ax:
+        return
+
+    x_values = get_x_values_from_ax(ax)
+    x_value = get_closest(x_values, event.xdata)
+
+    # Added in #510
+    if isinstance(ax.xaxis.get_major_locator(), TimeSeries_DateLocator):
+        x_value = pd.Period(
+            ordinal=int(x_value),
+            freq=ax.xaxis.get_major_locator().freq,
+        )
+        x_value = x_value.to_timestamp().to_pydatetime()
+    elif isinstance(ax.xaxis.get_major_locator(), DateLocator):
+        x_value = num2date(x_value).replace(tzinfo=None)
+
+    return x_value
+
+
+# Added in #508
 def get_y_at_x(artist: Union[Line2D, PathCollection], x):
     """
     Extract the y-coordinate corresponding to a given x-coordinate from a matplotlib
@@ -260,8 +285,11 @@ def get_y_at_x(artist: Union[Line2D, PathCollection], x):
         If the artist type is neither Line2D nor PathCollection.
     """
 
+    # This will convert dates to floats
+    x = artist.convert_xunits(x)
+
     if isinstance(artist, Line2D):
-        x_data, y_data = artist.get_data()
+        x_data, y_data = artist.get_data(orig=False)
     elif isinstance(artist, PathCollection):
         x_data, y_data = artist.get_offsets().T
     else:
