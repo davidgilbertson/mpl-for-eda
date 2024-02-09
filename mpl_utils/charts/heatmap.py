@@ -1,4 +1,5 @@
 from matplotlib import pyplot as plt
+from matplotlib.axes import Axes
 from matplotlib.backend_bases import MouseEvent
 from matplotlib.category import StrCategoryConverter
 import pandas as pd
@@ -14,7 +15,7 @@ def plot_heatmap(
     cbar=True,
     tooltips=True,
     **kwargs,
-):
+) -> Axes:
     if ax is None:
         mpl_utils.setup()
         ax = plt.subplots(num=title, clear=True)[1]
