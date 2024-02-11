@@ -1,6 +1,6 @@
-import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.widgets import Cursor, Button
+import pandas as pd
 
 import mpl_utils
 
@@ -21,6 +21,7 @@ ax.plot(chart_df, label=chart_df.columns)
 ax.legend()
 cursor = Cursor(
     ax=ax,
+    vertOn=False,
     linestyle="--",
     linewidth=1,
     color="#aaa",
