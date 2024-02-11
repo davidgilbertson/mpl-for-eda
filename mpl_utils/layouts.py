@@ -101,7 +101,7 @@ def add_axes_px(
         The figure to which the axes will be added. If not provided, the current figure
         is used.
 
-    **kwargs : dict
+    **kwargs :
         Additional keyword arguments passed to the `add_axes` method of the matplotlib figure.
 
     Returns
