@@ -12,25 +12,31 @@ ax1.set_facecolor("tab:blue")
 ax2 = ax1.inset_axes(
     bounds=(1.05, 0, 0.2, 1),
     facecolor="tab:orange",
+    xticks=[],
+    yticks=[],
 )
-ax2.set(xticks=[], yticks=[])
 
 # Using pixels for x/y/width/height
 ax3 = ax1.inset_axes(
     bounds=(100, 100, 400, 100),  # pixels
     transform=IdentityTransform(),
     facecolor="tab:green",
+    xticks=[],
+    yticks=[],
 )
-ax3.set(xticks=[], yticks=[])
 
-# A different inset axes, uses AnchoredOffsetbox behind the scenes
+# A different inset_axes, uses AnchoredOffsetbox behind the scenes
 # This will not be a child of ax1 like the others
 ax4 = inset_axes(
-    ax1,
+    parent_axes=ax1,
     loc="lower left",
     bbox_to_anchor=(200, 300),  # pixels
     width=2,  # hectopixels
     height=3,  # hectopixels
 )
-ax4.set_facecolor("tab:red")
-ax4.set(xticks=[], yticks=[])
+
+ax4.set(
+    facecolor="tab:red",
+    xticks=[],
+    yticks=[],
+)

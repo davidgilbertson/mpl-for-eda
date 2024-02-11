@@ -37,7 +37,7 @@ The below maps the Udemy course sections and lectures to the files used in those
 | 6. Tooltips      | 604 Legend tooltip                      | [legend_tooltip.py](./mpl_utils/legend_tooltip.py)                                                        |
 | 6. Tooltips      | 605 Mplcursors tooltip                  | [mplcursors_tooltip.py](./mpl_utils/mplcursors_tooltip.py)                                                |
 | 6. Tooltips      | 606 Tooltips on a heatmap               | [heatmap.py](./mpl_utils/charts/heatmap.py)                                                               |
-| 7. Layouts       | 701 Overview                            | [701a_subplots.py](theory/701a_subplots.py) & other 701 files                                             |
+| 7. Layouts       | 701 Overview                            | [701a_subplots.py](theory/701a_subplots.py) & other 701x files                                            |
 | 7. Layouts       | 702 Combining fixed and relative        | [layouts.py](./mpl_utils/layouts.py)                                                                      |
 | 7. Layouts       | 703 Fixed placement axes                | [layouts.py](./mpl_utils/layouts.py)                                                                      |
 | 8. Widgets       | 801 Widget introduction                 | [801_widgets_introduction.py](theory/801_widgets_introduction.py)                                         |
