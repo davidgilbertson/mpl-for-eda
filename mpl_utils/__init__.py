@@ -31,8 +31,8 @@ from .chart_manager import chart  # Added in #901
 # This is called as a hook when a figure is created
 def configure_figure(fig):
     try:
-        # fig.canvas.manager.window.geometry("1924x1054+1790+297")  # Full width for course
-        # fig.canvas.manager.window.geometry("840x1054+2874+297")  # Standard for course
+        # fig.canvas.manager.window.geometry("840x1054+2874+297")  # Standard
+        # fig.canvas.manager.window.geometry("1924x1054+1790+297")  # Full width
         fig.canvas.manager.window.geometry("840x1054+4161+66")  # Second monitor
         # fig.canvas.manager.window.geometry("1000x1000+4161+66")  # Square
     except AttributeError:
