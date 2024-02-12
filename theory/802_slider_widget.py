@@ -17,7 +17,7 @@ fig, (ax, spacer_ax) = mpl_utils.flex_subplots(
 )
 spacer_ax.set_axis_off()
 
-scatter_collection = ax.scatter(x=[], y=[])
+path_collection = ax.scatter(x=[], y=[])
 
 ax.set(
     title="Potato yields",
@@ -31,7 +31,7 @@ ax.set(
 
 def plot_year(year):
     year_df = df[df.Year.eq(year)]
-    scatter_collection.set(
+    path_collection.set(
         offsets=year_df[["Population", "Yield"]],
         sizes=10 + Normalize()(year_df.GDPPC) * 200,
         color=[f"C{regions.index(r)}" for r in year_df.Region],

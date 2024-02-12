@@ -19,8 +19,6 @@ def add_text_box(
     ] = "bottom left",
     label="",
     fig=None,
-    color=None,
-    hovercolor=None,
     **kwargs,
 ):
     fig = fig or plt.gcf()
@@ -28,8 +26,8 @@ def add_text_box(
     text_box = TextBox(
         ax=mpl_utils.add_axes_px(bounds=bounds, origin=origin, fig=fig),
         label=label,
-        color=color or plt.rcParams["grid.color"],
-        hovercolor=hovercolor or plt.rcParams["axes.edgecolor"],
+        color=plt.rcParams["grid.color"],
+        hovercolor=plt.rcParams["axes.edgecolor"],
         **kwargs,
     )
     text_box.cursor.set_color(plt.rcParams["text.color"])

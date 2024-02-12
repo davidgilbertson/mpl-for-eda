@@ -1,5 +1,6 @@
 from collections.abc import Sequence, Iterable
 
+from matplotlib.axes import Axes
 import numpy as np
 import pandas as pd
 from matplotlib import pyplot as plt
@@ -12,7 +13,7 @@ def plot_searchable_scatter(
     y,
     labels: Iterable,
     **kwargs,
-):
+) -> Axes:
     if not isinstance(labels, Sequence):
         labels = list(labels)
 
