@@ -1,4 +1,4 @@
-from collections.abc import Sequence, Iterable, Callable
+from collections.abc import Iterable, Callable
 from itertools import zip_longest
 from typing import Any
 
@@ -11,11 +11,12 @@ import pandas as pd
 import mpl_utils
 
 
-def batched(items: Iterable, n) -> list[Sequence]:
-    if not isinstance(items, Sequence):
+def batched(items: Iterable, n) -> list[list]:
+    if not isinstance(items, list):
         items = list(items)
 
-    return [items[i : i + n] for i in range(0, len(items), n)]
+    batch_starts = range(0, len(items), n)
+    return [items[i : i + n] for i in batch_starts]
 
 
 # Added in #804
@@ -57,7 +58,7 @@ class plot_paginated:
             x=80,
             y=25,
             transform=IdentityTransform(),
-            s="77 of 777",
+            s="",
             ha="center",
             va="center_baseline",
         )
@@ -78,11 +79,11 @@ class plot_paginated:
                 on_change=self.on_search_change,
             )
 
-        self.render_charts()
+        self.render_page()
 
         self.fig._plot_paginated_ref = self
 
-    def on_search_change(self, text: str):
+    def on_search_change(self, text):
         if text == "":
             filtered_items = self.items
         else:
@@ -97,7 +98,7 @@ class plot_paginated:
         else:
             self.curr_page_items = []
 
-        self.render_charts()
+        self.render_page()
 
     def change_page(self, shift: int):
         if not self.paged_items:
@@ -106,9 +107,9 @@ class plot_paginated:
         self.curr_page_index = (self.curr_page_index + shift) % len(self.paged_items)
         self.curr_page_items = self.paged_items[self.curr_page_index]
 
-        self.render_charts()
+        self.render_page()
 
-    def render_charts(self):
+    def render_page(self):
         for item, ax in zip_longest(self.curr_page_items, self.axs):
             ax.clear()
 
@@ -127,7 +128,6 @@ class plot_paginated:
 if __name__ == "__main__":
     df = pd.read_csv("../../data/crop-data.csv")
 
-    # 1. Basic line chart example
     def render(ax: Axes, item: tuple[str, pd.DataFrame]):
         item_name, item_df = item
         chart_df = item_df.pivot_table(
@@ -150,21 +150,3 @@ if __name__ == "__main__":
         filter_predicate=lambda item, text: text.lower() in item[0].lower(),
     )
     self.fig.suptitle("Yield by country and crop")
-
-    # # 2. Heatmap example
-    # def render(ax: Axes, item: tuple[str, pd.DataFrame]):
-    #     label, region_df = item
-    #     chart_df = region_df.pivot_table(
-    #         index="Country",
-    #         columns="Crop",
-    #         values="Yield",
-    #     )
-    #
-    #     mpl_utils.plot_heatmap(chart_df, ax)
-    #     ax.set_title(label)
-    #
-    # plot_paginated(
-    #     items=df.groupby("Region"),
-    #     render=render,
-    #     items_per_page=1,
-    # )

@@ -14,7 +14,7 @@ def plot_searchable_scatter(
     labels: Iterable,
     **kwargs,
 ) -> Axes:
-    if not isinstance(labels, Sequence):
+    if not isinstance(labels, list):
         labels = list(labels)
 
     if len(labels) != len(x):
