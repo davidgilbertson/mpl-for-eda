@@ -126,6 +126,7 @@ class chart:
         mpl_utils.setup()
         self.fig, self.ax = plt.subplots(num=name, clear=True, **kwargs)
         mpl_utils.clear_events()
+        mpl_utils.add_text_zoom()
 
         if pan and not self.existing_figure:
             self.fig.canvas.toolbar.pan()
@@ -145,7 +146,7 @@ class chart:
             ncols = math.floor(math.sqrt(ax_count))
         nrows = math.ceil(ax_count / ncols)
 
-        grid_spec = self.fig.add_gridspec(nrows, ncols)
+        grid_spec = self.fig.add_gridspec(nrows=nrows, ncols=ncols)
 
         for ax, subplot_spec in zip(self.axs, grid_spec):
             ax.set_subplotspec(subplot_spec)
