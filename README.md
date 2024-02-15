@@ -2,6 +2,12 @@
 
 🚧 This is the repository for an upcoming course, currently a work in progress.
 
+To run the code in this repo, you'll need four packages:
+
+```bash
+pip install matplotlib numpy pandas mplcursors
+```
+
 ## Index
 
 The below maps the Udemy course sections and lectures to the files used in those lectures.

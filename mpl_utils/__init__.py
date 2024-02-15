@@ -48,11 +48,11 @@ def setup(font_bump=1):
         * plt.rcParamsOrig["axes.prop_cycle"]
     )
 
-    blue_grey_100 = "#cfd8dc"
-    blue_grey_300 = "#90a4ae"
-    blue_grey_700 = "#455a64"
-    blue_grey_900 = "#263238"
-    blue_grey_950 = "#1d272b"
+    blue_gray_100 = "#cfd8dc"
+    blue_gray_300 = "#90a4ae"
+    blue_gray_700 = "#455a64"
+    blue_gray_900 = "#263238"
+    blue_gray_950 = "#1d272b"
 
     plt.rcParams.update(
         {
@@ -68,13 +68,13 @@ def setup(font_bump=1):
             "figure.constrained_layout.wspace": 0.05,
             # Styles
             "font.size": 10 + font_bump,
-            "figure.facecolor": blue_grey_950,
-            "axes.facecolor": blue_grey_950,
-            "text.color": blue_grey_100,
-            "axes.labelcolor": blue_grey_300,
+            "figure.facecolor": blue_gray_950,
+            "axes.facecolor": blue_gray_950,
+            "text.color": blue_gray_100,
+            "axes.labelcolor": blue_gray_300,
             "axes.grid": True,
-            "grid.color": blue_grey_900,
-            "axes.edgecolor": blue_grey_700,  # used by spines
+            "grid.color": blue_gray_900,
+            "axes.edgecolor": blue_gray_700,  # used by spines
             "axes.linewidth": 1,  # used by spines
             "axes.spines.top": False,
             "axes.spines.left": False,
@@ -92,8 +92,8 @@ def setup(font_bump=1):
             "ytick.major.size": 0,
             "xtick.minor.width": 0,
             "ytick.minor.size": 0,
-            "xtick.color": blue_grey_300,
-            "ytick.color": blue_grey_300,
+            "xtick.color": blue_gray_300,
+            "ytick.color": blue_gray_300,
             # Other
             "axes.prop_cycle": prop_cycle,
             "axes.xmargin": 0.01,
@@ -103,8 +103,8 @@ def setup(font_bump=1):
             "legend.columnspacing": 1,
             "hist.bins": "auto",
             "scatter.edgecolors": "none",
-            "patch.facecolor": blue_grey_900,  # used by tooltip
-            "patch.edgecolor": blue_grey_700,
+            "patch.facecolor": blue_gray_900,  # used by tooltip
+            "patch.edgecolor": blue_gray_700,
             "patch.linewidth": 0.5,
             "figure.hooks": "mpl_utils:configure_figure",
         }
