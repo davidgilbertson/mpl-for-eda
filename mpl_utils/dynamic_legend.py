@@ -24,7 +24,7 @@ class add_dynamic_legend(mpl_utils.EventsMixin):
         self.legend = ax.legend(title="Legend", alignment="left", **kwargs)
 
         self.vline = ax.axvline(
-            x=float("nan"),
+            x=float("nan"),  # ax.dataLim.xmin would be fine too
             linestyle=":",
             color="white",
             alpha=0.4,

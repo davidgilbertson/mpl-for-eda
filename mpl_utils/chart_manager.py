@@ -14,30 +14,43 @@ import mpl_utils
 
 # Added in #902
 class FastLayoutEngine(ConstrainedLayoutEngine):
-    def __init__(self, fig):
+    def __init__(self, fig=None):
         super().__init__()
 
         self.enabled = True
+        self.timer = None
 
+        fig = fig or plt.gcf()
         self.fig = fig
-        self.fig.canvas.mpl_connect("figure_enter_event", self.on_figure_enter)
-        self.fig.canvas.mpl_connect("button_release_event", self.force_execute)
-        self.fig.canvas.mpl_connect("key_release_event", self.force_execute)
-        self.fig.canvas.mpl_connect("figure_leave_event", self.on_figure_leave)
-
-    def execute(self, fig):
-        if self.enabled:
-            super().execute(fig)
+        fig.canvas.mpl_connect("figure_enter_event", self.on_figure_enter)
+        fig.canvas.mpl_connect("figure_leave_event", self.on_figure_leave)
+        fig.canvas.mpl_connect("button_release_event", self.force_execute)
+        fig.canvas.mpl_connect("key_release_event", self.force_execute)
+        fig.canvas.mpl_connect("scroll_event", self.on_scroll)
 
     def on_figure_enter(self, _):
         self.enabled = False
+
+    def on_figure_leave(self, _):
+        self.enabled = True
+
+    # Added in 903
+    def on_scroll(self, event):
+        if self.timer:
+            self.timer.stop()
+
+        self.timer = self.fig.canvas.new_timer(100)  # ms
+        self.timer.single_shot = True
+        self.timer.add_callback(self.force_execute)
+        self.timer.start()
 
     def force_execute(self, event=None):
         super().execute(self.fig)
         self.fig.canvas.draw_idle()
 
-    def on_figure_leave(self, _):
-        self.enabled = True
+    def execute(self, fig):
+        if self.enabled:
+            super().execute(fig)
 
 
 # Added in #903
@@ -72,37 +85,21 @@ class add_zoom_on_scroll:
         )
 
         # Limit zooming out
-        new_view_limits = Bbox.intersection(ax.viewLim, ax.dataLim) or ax.viewLim
-        if new_view_limits.bounds != ax.dataLim.bounds:
-            ax.set_xbound(new_view_limits.xmin, new_view_limits.xmax)
-            ax.set_ybound(new_view_limits.ymin, new_view_limits.ymax)
+        new_limits = Bbox.intersection(ax.viewLim, ax.dataLim) or ax.viewLim
+        if new_limits.bounds != ax.dataLim.bounds:
+            ax.set_xbound(new_limits.xmin, new_limits.xmax)
+            ax.set_ybound(new_limits.ymin, new_limits.ymax)
         else:
             ax.autoscale()
 
-        self.fig.canvas.draw_idle()
         self.fig.canvas.toolbar.push_current()
 
-        layout_engine = self.fig.get_layout_engine()
-        if isinstance(layout_engine, FastLayoutEngine):
-            if self.timer:
-                self.timer.stop()
-
-            self.timer = self.fig.canvas.new_timer(100)  # ms
-            self.timer.single_shot = True
-            self.timer.add_callback(layout_engine.force_execute)
-            self.timer.start()
+        self.fig.canvas.draw_idle()
 
     def on_mouse_down(self, event: MouseEvent):
-        ax = event.inaxes
-
-        if not ax:
-            return
-
-        if not event.dblclick:
-            return
-
-        ax.autoscale()
-        self.fig.canvas.draw_idle()
+        if ax := event.inaxes and event.dblclick:
+            ax.autoscale()
+            self.fig.canvas.draw_idle()
 
 
 class AxesWithSpawn(Axes):
