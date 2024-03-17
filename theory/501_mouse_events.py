@@ -1,8 +1,8 @@
-import pandas as pd
 from matplotlib import pyplot as plt
 from matplotlib.axes import Axes
 from matplotlib.backend_bases import MouseEvent
 from matplotlib.figure import Figure
+import pandas as pd
 
 import mpl_utils
 
@@ -31,6 +31,7 @@ def on_mouse_move(event: MouseEvent):
     msg = f"Global average yield in {year} was {mean_yield:.1f} t/ha"
 
     fig.suptitle(msg)
+
     fig.canvas.draw_idle()
 
 

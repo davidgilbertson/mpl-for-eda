@@ -10,17 +10,20 @@ def configure_figure(fig):
 
 
 def setup(font_bump=1):
+    plt.rcdefaults()
+
+    # This cycler will cycle through the default colors with a plain line,
+    # then again for a dashed line, and again for a dotted line
+    prop_cycle = (
+        plt.cycler("linestyle", ["-", "--", ":", "-."])
+        * plt.rcParams["axes.prop_cycle"]
+    )
+
     blue_gray_100 = "#cfd8dc"
     blue_gray_300 = "#90a4ae"
     blue_gray_700 = "#455a64"
     blue_gray_900 = "#263238"
     blue_gray_950 = "#1d272b"
-
-    # This cycler will cycle through the default colors with a plain line,
-    # then again for a dashed line, and again for a dotted line
-    prop_cycle = (
-        plt.cycler("linestyle", ["-", "--", ":"]) * plt.rcParamsOrig["axes.prop_cycle"]
-    )
 
     plt.rcParams.update(
         {
